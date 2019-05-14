@@ -12,7 +12,7 @@ public class Consumidor implements Runnable {
 	public void run() {
 		while (true) {
 			synchronized (this.buffer) {
-				while(!this.buffer.isEmpty()) {
+				while(this.buffer.isEmpty()) {
 					try {
 						this.buffer.wait();
 					} catch (InterruptedException e) {
