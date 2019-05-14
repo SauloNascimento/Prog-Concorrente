@@ -13,7 +13,7 @@ public class Produtor implements Runnable {
 	public void run() {
 		while (true) {
 			synchronized (this.buffer) {
-				while(!this.buffer.isFull()) {
+				while(this.buffer.isFull()) {
 					try {
 						this.buffer.wait();
 					} catch (InterruptedException e) {
