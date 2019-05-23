@@ -21,19 +21,33 @@ void* run(void* args){
 	
 }
 
-int main (int argc , char *argv[]){
-	
+int* request(){
+	int num = 1 + rand() % (30 + 1 - 1);
+	printf(num);
+	sleep(num);
+	return num;
+}
+
+
+
+int gateway(int num_replicas){
 	int i;
-	pthread_t pthreads[3];
+	pthread_t pthreads[num_replicas];
 	pthread_mutex_init(&mutex, NULL);
 	
-	for(i = 0; i < 3 ; i++){
+	for(i = 0; i < num_replicas; i++){
 		pthread_create(&pthreads[i], NULL, &run, (void*) i);
 	}
 	
-	for(i = 0; i < 3 ; i++){
+	for(i = 0; i < num_replicas; i++){
 		pthread_join(pthreads[i], NULL);
 	}
 	
-	printf("counter=%ld\n", counter);
+	
+}
+
+int main (int argc , char *argv[]){
+	int value = gateway(3);
+	printf("O valor da primeira thread finalizada é=%ld\n", value);
+	
 }
