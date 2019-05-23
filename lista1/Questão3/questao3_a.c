@@ -7,7 +7,7 @@
 
 long int counter = 0;
 pthread_barrier_t barreira;
-
+int thread_id_aux = 0
 void* run(void* args){
 	int thread_id;
 	
@@ -16,7 +16,7 @@ void* run(void* args){
 	counter++;
 	
 	if (counter == 1) {
-		printf("A thread que terminou de executar primeiro foi a thread: %d\n", thread_id);
+		thread_id_aux = thread_id;
 	}
 	pthread_barrier_destroy(&barreira);
 	
@@ -46,7 +46,8 @@ int gateway(int num_replicas){
 	
 	pthread_barrier_wait(&barreira);
 
-
+	printf("A thread que terminou de executar primeiro foi a thread: : %d", thread_id_aux);
+	
 	for(i = 0; i < num_replicas ; i++){
 		pthread_join(pthreads[i], NULL);
 	}
