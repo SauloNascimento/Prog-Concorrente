@@ -56,7 +56,8 @@ int gateway(int num_replicas){
 }
 
 int main (int argc , char *argv[]){
-	int value = 40;
+	srand(time(NULL));
+	int value = 250;
 	gateway(value);
 
 }
