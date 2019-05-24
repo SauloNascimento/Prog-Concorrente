@@ -8,19 +8,7 @@
 long int counter = 0;
 pthread_barrier_t barreira;
 
-
-
-int request(){
-	int num = 1 + rand() % (30 -1);
-	sleep(num);
-	return num;
-}
-
-
-
-int gateway(int num_replicas){
-	
-	void* run(void* args){
+void* run(void* args){
 	int thread_id;
 	
 	thread_id = (int) args;
@@ -38,7 +26,17 @@ int gateway(int num_replicas){
 	return NULL;
 
 	
-	}
+}
+
+int request(){
+	int num = 1 + rand() % (30 -1);
+	sleep(num);
+	return num;
+}
+
+
+
+int gateway(int num_replicas){
 	int i;
 	pthread_t pthreads[num_replicas];
 	pthread_barrier_init(&barreira, NULL, 1);
@@ -62,5 +60,5 @@ int gateway(int num_replicas){
 int main (int argc , char *argv[]){
 	int value = 40;
 	gateway(value);
-	
+
 }
