@@ -34,8 +34,6 @@ int request(){
 	return num;
 }
 
-
-
 int gateway(int num_replicas){
 	int i;
 	pthread_t pthreads[num_replicas];
