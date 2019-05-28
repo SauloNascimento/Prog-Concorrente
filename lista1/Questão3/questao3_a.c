@@ -56,7 +56,8 @@ int gateway(int num_replicas){
 
 int main (int argc , char *argv[]){
 	srand(time(NULL));
-	int value = 2 ;
-	gateway(value);
+	int value = 10;
+	int ret = gateway(value);
+	printf("Valor de retorno: %d\n", ret);
 
 }
