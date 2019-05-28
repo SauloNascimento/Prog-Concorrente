@@ -47,7 +47,6 @@ int gateway(int num_replicas){
 		pthread_cond_wait(&cond,&mutex);
 		
 	}
-	printf("%d\n", retorno);
 	pthread_mutex_unlock(&mutex);
 
 	
@@ -57,7 +56,7 @@ int gateway(int num_replicas){
 int main (int argc , char *argv[]){
 	srand(time(NULL));
 	int value = 10;
-	int ret = gateway(value);
+	int ret = gateway(atoi(argv[1]));
 	printf("Valor de retorno: %d\n", ret);
 
 }
