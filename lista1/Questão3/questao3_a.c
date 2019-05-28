@@ -11,12 +11,9 @@ pthread_cond_t  cond;
 int retorno = 0;
 int count = 0;
 
-void* request(){
+void* run(){
 
-	int num = 1 + rand() % (30 - 1);
-	printf("%d\n", num);
-	sleep(num);
-	count++;
+	int num = request();
 	pthread_mutex_lock(&mutex);
 	if (count == 1) {
 		retorno = num;
@@ -27,19 +24,23 @@ void* request(){
 	pthread_mutex_unlock(&mutex);
 	
 
-	
-
 
 	
 }
 
+int request(){
+	int num = 1 + rand() % (30 - 1);
+	printf("%d\n", num);
+	sleep(num);
+	count++;
+}
 int gateway(int num_replicas){
 	int i;
 	pthread_t pthreads[num_replicas];
 	pthread_mutex_init(&mutex, NULL);
 	pthread_cond_init(&cond, NULL);
 	for(i = 0; i < num_replicas ; i++){
-		pthread_create(&pthreads[i], NULL, &request, NULL);	
+		pthread_create(&pthreads[i], NULL, &run, NULL);	
 	}
 	
 	pthread_mutex_lock(&mutex);
