@@ -17,6 +17,7 @@ void* run(){
 	pthread_mutex_lock(&mutex);
 	if (count == 1) {
 		retorno = num;
+		printf("Valor de retorno: %d\n", retorno);
 	}
 
 	pthread_mutex_unlock(&mutex);
@@ -33,6 +34,7 @@ int request(){
 	printf("%d\n", num);
 	sleep(num);
 	count++;
+	return num;
 }
 int gateway(int num_replicas){
 	int i;
