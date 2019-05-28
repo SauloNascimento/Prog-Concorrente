@@ -17,7 +17,6 @@ void* run(){
 	pthread_mutex_lock(&mutex);
 	if (count == 1) {
 		retorno = num;
-		printf("Valor de retorno: %d\n", retorno);
 	}
 
 	pthread_mutex_unlock(&mutex);
@@ -31,7 +30,7 @@ void* run(){
 
 int request(){
 	int num = 1 + rand() % (30 - 1);
-	printf("%d\n", num);
+	printf("Valor sorteado : %d\n", num);
 	sleep(num);
 	count++;
 	return num;
