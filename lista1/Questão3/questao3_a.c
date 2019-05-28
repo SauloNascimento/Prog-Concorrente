@@ -4,36 +4,33 @@
 #include <pthread.h>
 #include <unistd.h>
 #include <time.h>
-#include <semaphore.h>
 
-long int counter = 0;
+
 pthread_mutex_t mutex;
 pthread_cond_t  cond;
-sem_t sema;
-int retorno;
+int retorno = 0;
+int count = 0;
 
-void* run(void* args){
-	int thread_id;
-	long int j;
-	
-	thread_id = (int) args;
-	pthread_mutex_lock(&mutex);
-	int num = request();
-	pthread_mutex_unlock(&mutex);
+void* request(){
 
-	printf("A thread que terminou de executar primeiro foi a thread: %d\n", num);
-	printf("O número sorteado por request foi: %d\n" , num);
-
-	pthread_exit(thread_id);
-	
-}
-
-int request(){
-	pthread_cond_wait(&cond);
-	int num = 1 + rand() % (30 -1);
+	int num = 1 + rand() % (30 - 1);
+	printf("%d\n", num);
 	sleep(num);
-	sem_post(&sema);
-	pthread_exit(num);
+	count++;
+	pthread_mutex_lock(&mutex);
+	if (count == 1) {
+		retorno = num;
+	}
+
+	pthread_mutex_unlock(&mutex);
+	pthread_cond_signal(&cond);
+	pthread_mutex_unlock(&mutex);
+	
+
+	
+
+
+	
 }
 
 int gateway(int num_replicas){
@@ -41,21 +38,25 @@ int gateway(int num_replicas){
 	pthread_t pthreads[num_replicas];
 	pthread_mutex_init(&mutex, NULL);
 	pthread_cond_init(&cond, NULL);
-	sem_init(&mutex, 0, 0);
-	
 	for(i = 0; i < num_replicas ; i++){
-		pthread_create(&pthreads[i], NULL, &run, (void*) i);	
+		pthread_create(&pthreads[i], NULL, &request, NULL);	
 	}
 	
-	pthread_cond_broadcast(&pthreads);
+	pthread_mutex_lock(&mutex);
+	while (retorno == 0){
+		pthread_cond_wait(&cond,&mutex);
+		
+	}
+	printf("%d\n", retorno);
+	pthread_mutex_unlock(&mutex);
+
 	
-	sem_wait(&sema);
-	return x;
+	return retorno;
 }
 
 int main (int argc , char *argv[]){
 	srand(time(NULL));
-	int value = 250;
+	int value = 2 ;
 	gateway(value);
 
 }
