@@ -1,0 +1,22 @@
+my_id=0 j=10000000 counter=10000000
+my_id=1 j=10000000 counter=20000000
+my_id=2 j=10000000 counter=30000000
+counter=30000000
+
+ Performance counter stats for './questao1':
+
+         77,973064      task-clock (msec)         #    0,990 CPUs utilized          
+                 6      context-switches          #    0,077 K/sec                  
+                 1      cpu-migrations            #    0,013 K/sec                  
+                74      page-faults               #    0,949 K/sec                  
+        77.163.647      cycles                    #    0,990 GHz                      (35,04%)
+       137.646.302      instructions              #    1,78  insn per cycle           (75,79%)
+        22.461.507      branches                  #  288,068 M/sec                    (80,51%)
+            17.822      branch-misses             #    0,08% of all branches          (83,13%)
+       131.365.295      L1-dcache-loads           # 1684,752 M/sec                    (84,64%)
+            14.798      L1-dcache-load-misses     #    0,01% of all L1-dcache hits    (77,50%)
+             8.184      LLC-loads                 #    0,105 M/sec                    (42,71%)
+             1.440      LLC-load-misses           #   17,60% of all LL-cache hits     (30,77%)
+
+       0,078727587 seconds time elapsed
+
