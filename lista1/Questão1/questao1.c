@@ -15,7 +15,6 @@ void* run(void* args){
 	for(j = 0; j < 1e7 ; j++){
 		counter = counter + 1;
 	}
-	
 	pthread_mutex_unlock(&mutex);
 	printf("my_id=%d j=%ld counter=%ld\n", my_id , j , counter);
 	pthread_exit(my_id);
