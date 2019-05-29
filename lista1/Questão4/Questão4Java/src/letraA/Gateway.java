@@ -1,10 +1,8 @@
-package letraB;
-
-import java.util.Arrays;
+package letraA;
 
 public class Gateway implements Runnable{
 	private int numReplicas;
-	private int total;
+	private int num;
 	
 	public Gateway(int numReplicas) {
 		this.numReplicas = numReplicas;
@@ -17,7 +15,7 @@ public class Gateway implements Runnable{
 	
 	private int gateway() {
 		Lock lock = new Lock();
-		Chanel chanel = new Chanel(numReplicas);
+		Chanel chanel = new Chanel();
 		Thread[] threads = new Thread[numReplicas];
 		for (int i = 0; i < threads.length; i++) {
 			Request request = new Request(lock, chanel);
@@ -27,16 +25,13 @@ public class Gateway implements Runnable{
 		synchronized (lock) {
 			lock.unlock();
 		}
-		try {
-			synchronized (chanel) {
-				int[] results = chanel.recieve();
-				for (int i = 0; i < results.length; i++) {
-					total += results[i];
-				}
+		synchronized (chanel) {
+			try {
+				num = chanel.recieve();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
 			}
-		} catch (InterruptedException e) {
-			e.printStackTrace();
+			return num;
 		}
-		return total;
 	}
 }

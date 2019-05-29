@@ -1,4 +1,4 @@
-package letraB;
+package letraA;
 
 import java.util.Random;
 
@@ -32,10 +32,6 @@ public class Request implements Runnable{
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		return num;
-	}
-	
-	public int getNum() {
 		return num;
 	}
 

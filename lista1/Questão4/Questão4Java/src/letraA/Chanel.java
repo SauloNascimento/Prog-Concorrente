@@ -9,7 +9,7 @@ public class Chanel {
 	
 	public int recieve() throws InterruptedException {
 		if(num < 0)
-			this.wait();
+			this.wait(8000);
 		return num;
 	}
 	
