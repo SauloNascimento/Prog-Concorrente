@@ -22,9 +22,6 @@ void* request(){
 	pthread_mutex_lock(&mutex);
 	retorno += num;
 	pthread_mutex_unlock(&mutex);
-
-
-
 	
 }
 
