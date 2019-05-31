@@ -1,16 +1,18 @@
 package letraB;
 
 import java.util.Random;
+import letraB.Channel;
+import letraB.Lock;
 
 public class Request implements Runnable{
 	private static final Random rand = new Random();
 	private Lock lock;
-	private Chanel chanel;
+	private Channel channel;
 	private int num;
 	
-	public Request(Lock lock, Chanel chanel) {
+	public Request(Lock lock, Channel channel) {
 		this.lock = lock;
-		this.chanel = chanel;
+		this.channel = channel;
 	}
 	
 	@Override
@@ -26,8 +28,8 @@ public class Request implements Runnable{
 			}
 			num = rand.nextInt(30) + 1;
 			Thread.sleep(num*1000);
-			synchronized (chanel) {
-				chanel.send(num);
+			synchronized (channel) {
+				channel.send(num);
 			}
 		} catch (InterruptedException e) {
 			e.printStackTrace();

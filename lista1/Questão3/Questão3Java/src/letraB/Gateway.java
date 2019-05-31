@@ -1,6 +1,8 @@
 package letraB;
+import letraB.Lock;
+import letraB.Channel;
+import letraB.Request;
 
-import java.util.Arrays;
 
 public class Gateway implements Runnable{
 	private int numReplicas;
@@ -17,10 +19,10 @@ public class Gateway implements Runnable{
 	
 	private int gateway() {
 		Lock lock = new Lock();
-		Chanel chanel = new Chanel(numReplicas);
+		Channel channel = new Channel(numReplicas);
 		Thread[] threads = new Thread[numReplicas];
 		for (int i = 0; i < threads.length; i++) {
-			Request request = new Request(lock, chanel);
+			Request request = new Request(lock, channel);
 			threads[i] = new Thread(request);
 			threads[i].start();
 		}
@@ -28,8 +30,8 @@ public class Gateway implements Runnable{
 			lock.unlock();
 		}
 		try {
-			synchronized (chanel) {
-				int[] results = chanel.recieve();
+			synchronized (channel) {
+				int[] results = channel.recieve();
 				for (int i = 0; i < results.length; i++) {
 					total += results[i];
 				}
