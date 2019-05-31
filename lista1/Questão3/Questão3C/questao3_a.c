@@ -12,14 +12,17 @@ int retorno = 0;
 int count = 0;
 
 void* request(){
-	
 	int num = 1 + rand() % (30 - 1);
 	printf("Valor sorteado : %d\n", num);
 	sleep(num);
 	count++;
 	pthread_mutex_lock(&mutex);
-	retorno += num;
+	if (count == 1) {
+		retorno = num;
+	}
+	pthread_cond_signal(&cond);
 	pthread_mutex_unlock(&mutex);
+
 
 
 
@@ -36,19 +39,27 @@ int gateway(int num_replicas){
 		pthread_create(&pthreads[i], NULL, &request, NULL);	
 	}
 	
+	
+	pthread_mutex_lock(&mutex);
+	while (retorno == 0){
+		pthread_cond_wait(&cond,&mutex);
+		
+	}
+	printf("%d\n" , retorno);
+	pthread_mutex_unlock(&mutex);
 	for(i = 0; i < num_replicas ; i++){
 		pthread_join(pthreads[i], NULL);
 	}
 
-	
+
+
+
+
 	return retorno;
 }
 
 int main (int argc , char *argv[]){
 	srand(time(NULL));
-	int value = 10;
-	int ret = gateway(atoi(argv[1]));
-	printf("Soma de todos os valores sorteados: %d\n", ret);
+	gateway(atoi(argv[1]));
 
 }
-
