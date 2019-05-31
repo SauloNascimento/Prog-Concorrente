@@ -1,19 +1,22 @@
 package letraB;
 
-public class Chanel {
+public class Channel {
 	private int[] nums;
 	private int i;
 	
-	public Chanel(int size) {
+	public Channel(int size) {
 		i = 0;
 		nums = new int[size];
 	}
 	
 	public int[] recieve() throws InterruptedException {
 		if(i < nums.length) {
-			this.wait();
+			this.wait(16000);
 		}
-		return nums;
+		if(i == nums.length)
+			return nums;
+		else
+			return new int[] {-1};
 	}
 	
 	public void send(int number) {

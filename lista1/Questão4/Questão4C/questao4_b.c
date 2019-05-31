@@ -16,7 +16,6 @@ struct timeval    tp;
 void* request(){
 	
 	int num = 1 + rand() % (30 - 1);
-	printf("Valor sorteado : %d\n", num);
 	sleep(num);
 	count++;
 	pthread_mutex_lock(&mutex);
@@ -44,14 +43,13 @@ int gateway(int num_replicas){
 			retorno = -1;
 		}
 	}
+	printf("%d\n", retorno);
 
 	return retorno;
 }
 
 int main (int argc , char *argv[]){
 	srand(time(NULL));
-	int value = 10;
-	int ret = gateway(atoi(argv[1]));
-	printf("Soma de todos os valores sorteados: %d\n", ret);
+    gateway(atoi(argv[1]));
 
 }

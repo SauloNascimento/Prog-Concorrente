@@ -1,15 +1,15 @@
 package letraA;
 
-public class Chanel {
+public class Channel {
 	private int num;
 	
-	public Chanel() {
+	public Channel() {
 		num = -1;
 	}
 	
 	public int recieve() throws InterruptedException {
 		if(num < 0)
-			this.wait();
+			this.wait(8000);
 		return num;
 	}
 	

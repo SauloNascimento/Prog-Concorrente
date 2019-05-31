@@ -5,7 +5,7 @@ import java.math.*;
 public class Main {
 
 	public static void main(String[] args) throws InterruptedException {
-		Buffer buffer = new Buffer(5);
+		Buffer buffer = new Buffer(Integer.parseInt(args[0]));
 
 		Produtor produtor = new Produtor(buffer);
 		Consumidor consumidor = new Consumidor(buffer);

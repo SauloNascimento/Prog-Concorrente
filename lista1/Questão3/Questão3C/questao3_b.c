@@ -14,7 +14,6 @@ int count = 0;
 void* request(){
 	
 	int num = 1 + rand() % (30 - 1);
-	printf("Valor sorteado : %d\n", num);
 	sleep(num);
 	count++;
 	pthread_mutex_lock(&mutex);
