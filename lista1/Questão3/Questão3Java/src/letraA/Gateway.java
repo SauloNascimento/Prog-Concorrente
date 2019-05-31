@@ -1,4 +1,7 @@
 package letraA;
+import letraA.Lock;
+import letraA.Chanel;
+import letraA.Request;
 
 public class Gateway implements Runnable{
 	private int numReplicas;

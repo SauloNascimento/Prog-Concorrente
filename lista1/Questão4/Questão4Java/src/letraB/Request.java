@@ -1,6 +1,8 @@
 package letraB;
 
 import java.util.Random;
+import letraB.Chanel;
+import letraB.Lock;
 
 public class Request implements Runnable{
 	private static final Random rand = new Random();

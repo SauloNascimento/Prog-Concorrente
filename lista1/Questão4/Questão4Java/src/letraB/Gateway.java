@@ -1,6 +1,8 @@
 package letraB;
+import letraB.Lock;
+import letraB.Chanel;
+import letraB.Request;
 
-import java.util.Arrays;
 
 public class Gateway implements Runnable{
 	private int numReplicas;
