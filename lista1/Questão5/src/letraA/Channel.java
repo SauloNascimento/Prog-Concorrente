@@ -5,13 +5,12 @@ import java.util.List;
 
 public class Channel {
 	private List<Long> times;
-	private int i;
 
 	public Channel() {
 		times = new LinkedList<>();
 	}
 
-	public synchronized List recieve()  {
+	public synchronized List<Long> recieve()  {
 		return times;
 	}
 
