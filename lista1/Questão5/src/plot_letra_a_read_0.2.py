@@ -45,7 +45,7 @@ for line in dataset2:
 
 dataset2.close()
 plt.xlabel('Threads')
-plt.ylabel('Tempo (em nanotime)')
+plt.ylabel('Tempo Médio (em nanotime)')
 line_up, = plt.plot(x,y, label='ConcurrentHashMap')
 line_down, = plt.plot(x1,y1, label='Collections.synchronizedMap')
 plt.legend([line_up, line_down], ['ConcurrentHashMap', 'Collections.synchronizedMap'])
