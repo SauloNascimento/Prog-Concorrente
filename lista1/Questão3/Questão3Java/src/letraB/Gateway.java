@@ -1,7 +1,5 @@
 package letraB;
 
-import java.util.Arrays;
-
 public class Gateway implements Runnable{
 	private int numReplicas;
 	private int total;
