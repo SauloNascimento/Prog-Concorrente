@@ -1,4 +1,7 @@
 package letraA;
+import letraA.Lock;
+import letraA.Channel;
+import letraA.Request;
 
 public class Gateway implements Runnable{
 	private int numReplicas;
@@ -15,19 +18,19 @@ public class Gateway implements Runnable{
 	
 	private int gateway() {
 		Lock lock = new Lock();
-		Chanel chanel = new Chanel();
+		Channel channel = new Channel();
 		Thread[] threads = new Thread[numReplicas];
 		for (int i = 0; i < threads.length; i++) {
-			Request request = new Request(lock, chanel);
+			Request request = new Request(lock, channel);
 			threads[i] = new Thread(request);
 			threads[i].start();
 		}
 		synchronized (lock) {
 			lock.unlock();
 		}
-		synchronized (chanel) {
+		synchronized (channel) {
 			try {
-				num = chanel.recieve();
+				num = channel.recieve();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
