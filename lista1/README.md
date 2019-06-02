@@ -88,9 +88,9 @@ Para executar os scripts, rode o comando:
 ### Letra a ###
 [Código Java ](https://github.com/tainahemmanuele/programacao_concorrente/tree/master/lista1/Quest%C3%A3o5/src/letraA)
 
-Código para executar os experimentos
+[Código para executar os experimentos](https://github.com/tainahemmanuele/programacao_concorrente/blob/master/lista1/Quest%C3%A3o5/src/executa_letra_a.sh)
 
-Códigos para gerar os gráficos
+[Códigos para gerar os gráficos](https://github.com/tainahemmanuele/programacao_concorrente/tree/master/lista1/Quest%C3%A3o5/src/Artefatos_letra_a)
 
 
 ![](https://github.com/tainahemmanuele/programacao_concorrente/blob/master/lista1/Quest%C3%A3o5/src/graficos_letra_a/grafico_letra_a_read_0.2.png)
@@ -114,8 +114,8 @@ Podemos concluir, então, que quando se têm um ambiente em que o número de ope
 
 ### Letra b ###
 
-Código Java
+[Código Java](https://github.com/tainahemmanuele/programacao_concorrente/tree/master/lista1/Quest%C3%A3o5/src/letraB)
 
-Código para executar os experimentos
+[Código para executar os experimentos](https://github.com/tainahemmanuele/programacao_concorrente/blob/master/lista1/Quest%C3%A3o5/src/executa_letra_b.sh)
 
-Códigos para gerar os gráficos
+[Códigos para gerar os gráficos](https://github.com/tainahemmanuele/programacao_concorrente/tree/master/lista1/Quest%C3%A3o5/src/artefatos_letra_b)
