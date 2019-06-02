@@ -84,13 +84,14 @@ Para executar os scripts, rode o comando:
 
     python nomedoscript
 
+**Obs:** Em ambas as alternativas utilizamos a mesma quantidade de operações totais, variando a quantidade de threads e a proporção entre leitura e escrita.
 
 ### Letra a ###
 [Código Java ](https://github.com/tainahemmanuele/programacao_concorrente/tree/master/lista1/Quest%C3%A3o5/src/letraA)
 
-Código para executar os experimentos
+[Código para executar os experimentos](https://github.com/tainahemmanuele/programacao_concorrente/blob/master/lista1/Quest%C3%A3o5/src/executa_letra_a.sh)
 
-Códigos para gerar os gráficos
+[Códigos para gerar os gráficos](https://github.com/tainahemmanuele/programacao_concorrente/tree/master/lista1/Quest%C3%A3o5/src/Artefatos_letra_a)
 
 
 ![](https://github.com/tainahemmanuele/programacao_concorrente/blob/master/lista1/Quest%C3%A3o5/src/graficos_letra_a/grafico_letra_a_read_0.2.png)
@@ -114,8 +115,28 @@ Podemos concluir, então, que quando se têm um ambiente em que o número de ope
 
 ### Letra b ###
 
-Código Java
+[Código Java](https://github.com/tainahemmanuele/programacao_concorrente/tree/master/lista1/Quest%C3%A3o5/src/letraB)
 
-Código para executar os experimentos
+[Código para executar os experimentos](https://github.com/tainahemmanuele/programacao_concorrente/blob/master/lista1/Quest%C3%A3o5/src/executa_letra_b.sh)
 
-Códigos para gerar os gráficos
+[Códigos para gerar os gráficos](https://github.com/tainahemmanuele/programacao_concorrente/tree/master/lista1/Quest%C3%A3o5/src/artefatos_letra_b)
+
+![](https://github.com/tainahemmanuele/programacao_concorrente/blob/master/lista1/Quest%C3%A3o5/src/graficos_letra_b/grafico_letra_b_read_0.2.png)
+
+![](https://github.com/tainahemmanuele/programacao_concorrente/blob/master/lista1/Quest%C3%A3o5/src/graficos_letra_b/grafico_letra_b_read_0.5.png)
+
+![](https://github.com/tainahemmanuele/programacao_concorrente/blob/master/lista1/Quest%C3%A3o5/src/graficos_letra_b/grafico_letra_b_read_0.8.png)
+
+Como podemos notar a CopyOnWriteArraylList apresenta melhores resultados sendo que essa estrutura permite diversas leituras em conjunto, mesmo enquanto realiza várias operações de escrita, logo seu tempo nessa operação é melhor. A SynchronizedList trava toda a estrutura durante a escrita e leitura, o que faz ela manter estabilidade nos resultados, além disso, ela ainda consegue um nível de eficiência próximo ao da CopyOnWriteArraylList.
+
+![](https://github.com/tainahemmanuele/programacao_concorrente/blob/master/lista1/Quest%C3%A3o5/src/graficos_letra_b/grafico_letra_b_write_0.2.png)
+
+![](https://github.com/tainahemmanuele/programacao_concorrente/blob/master/lista1/Quest%C3%A3o5/src/graficos_letra_b/grafico_letra_b_write_0.5.png)
+
+![](https://github.com/tainahemmanuele/programacao_concorrente/blob/master/lista1/Quest%C3%A3o5/src/graficos_letra_b/grafico_letra_b_write_0.8.png)
+
+Nas operações de escrita, a SynchronizedList apresenta melhores resultados, enquanto se mostra mais estável, pois apenas uma operação ocorre por vez, seja ela escrita ou leitura. A CopyOnWriteArraylList é bem mais demorada devido a sua natureza de criar uma cópia da lista toda vez que ela é modificada, causando, além da perda de performance, um maior consumo de memória.
+
+Com isso, concluímos que para ambientes com um maior número de operações de leitura, o uso da CopyOnWriteArraylList é mais eficiente, visto que essa estrutura permite leituras simultâneas, fazendo com que o tempo gasto para escritas não tragam muito impacto no resultado final, ou até mesmo quando a lista não é grande, assim o tempo de escrita não perderia muita eficiência. 
+
+Por outro lado, a SynchronizedList apresenta um melhor desempenho em ambientes que se utilizam mais da operação de escrita. No entanto, mesmo durante a leitura a SynchronizedList se manteve estável e com bons tempos em relação a CopyOnWriteArrayList, desta forma a SynchronizedList se mostra uma melhor estrutura quando as duas operações, leitura e escrita, são usadas em igual proporção, ou mesmo em situações onde a leitura não tem uma relevância tão alta em cima da escrita.
