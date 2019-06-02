@@ -34,4 +34,4 @@ for i in $(seq 1 8) ; do
 done
 
 #Move arquivos gerados para pasta onde está os scripts para geração dos gráficos
-mv *.csv artefatos_letra_a
+mv *.csv Artefatos_letra_a
