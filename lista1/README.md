@@ -1,4 +1,5 @@
 # Resolução da Lista 1 - Programação Concorrente #
+[Questões da Lista ](https://docs.google.com/document/d/1blMH6kakRiwa4-WPYWp2Dks3Mt0SSq07XZysa2ffrPM/edit)
 
 ## Questão 1 ##
 [Código com uso de mutex (Contador não compartilhado) ](https://github.com/tainahemmanuele/programacao_concorrente/blob/master/lista1/Quest%C3%A3o1/questao1.c)
@@ -7,6 +8,7 @@
 
 ### Executando o perf em cada uma das versões do código ###
 Para o codigo que usa mutex, o resultado da execução do perf foi:
+
     Performance counter stats for './questao1':
 
          77,973064      task-clock (msec)         #    0,990 CPUs utilized          
@@ -72,11 +74,24 @@ Percebe-se que o tempo de execução do  código que usa mutex foi menor (0,0787
 
 
 ## Questão 5 ##
+Para plotar os gráficos, é necessário instalar a biblioteca mathplotlib
+
+     pip install matplotlib
+
+Depois, basta executar os scripts na pasta de artefatos, que já estão configurados para a quantidade de threads (de 1 a 128, dobrando a cada operação), carga (0.2, 0.5 e 0.8) e operações (1000).
+
+Para executar os scripts, rode o comando:
+
+    python nomedoscript
+
 
 ### Letra a ###
 [Código Java ](https://github.com/tainahemmanuele/programacao_concorrente/tree/master/lista1/Quest%C3%A3o5/src/letraA)
 
+Código para executar os experimentos
+
 Códigos para gerar os gráficos
+
 
 ![](https://github.com/tainahemmanuele/programacao_concorrente/blob/master/lista1/Quest%C3%A3o5/src/graficos_letra_a/grafico_letra_a_read_0.2.png)
 
@@ -96,3 +111,11 @@ Como podemos observar nos gráficos o ConcurrentHashMap é normalmente muito mai
 Já nas operações de escrita, o synchronizedMap se mostra melhor, novamente, isso se deve por apenas uma operação ocorrer por vez, independendo da natureza da operação,  e no ConcurrentHashMap a opração de escrita deve ocorrer só. Nota-se que com maior volume de operação de leitura, as operações de escrita no ConcurrentHashMap demoram em média mais tempo que com baixos volumes de leitura, isso é explicado pelo fato de que enquanto leituras estão sendo feitas, a operação de escrita espera que elas  acabem pra iniciar, então bloqueando a execução de qualquer operação na estrutura.
 
 Podemos concluir, então, que quando se têm um ambiente em que o número de operações de leitura é maior que o de operações de escrita, o ConcurrentHashMap é sem dúvida  a melhor opção, uma vez que o ganho de tempo nas operações de leitura será muito maior que o atraso gerado pelas operações de escrita. O synchronizedMap tende a se  tornar cada vez mais lento em qualquer operação com base na quantidade de threads operando, pois apenas uma thread poderá executar por vez, independendo do que ela  vá fazer (ler ou escrever), mas é uma boa opção quando a quantidade de operações de escrita é similar ou maior que a de leitura e quando houverem poucas threads  executando essas operações.
+
+### Letra b ###
+
+Código Java
+
+Código para executar os experimentos
+
+Códigos para gerar os gráficos
