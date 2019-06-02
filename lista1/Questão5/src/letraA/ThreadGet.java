@@ -17,6 +17,15 @@ public class ThreadGet implements Runnable {
 	}
 	@Override
 	public void run() {
+		synchronized (this) {
+			while (map.isEmpty()) {
+				try {
+					this.wait(1000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		}
 		for (int i = 0; i < operacoes; i++) {
 			ArrayList<Integer> list = new ArrayList<Integer>(map.keySet());
 			int key = list.get(random.nextInt(list.size()));
