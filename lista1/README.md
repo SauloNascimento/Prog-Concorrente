@@ -1,7 +1,49 @@
 # Resolução da Lista 1 - Programação Concorrente #
 
 ## Questão 1 ##
+[Código com uso de mutex (Contador não compartilhado) ](https://github.com/tainahemmanuele/programacao_concorrente/blob/master/lista1/Quest%C3%A3o1/questao1.c)
 
+[Código sem uso de mutex (Contador compartilhado)](https://github.com/tainahemmanuele/programacao_concorrente/blob/master/lista1/Quest%C3%A3o1/questao1_v1.c)
+
+### Executando o perf em cada uma das versões do código ###
+Para o codigo que usa mutex, o resultado da execução do perf foi:
+    Performance counter stats for './questao1':
+
+         77,973064      task-clock (msec)         #    0,990 CPUs utilized          
+                 6      context-switches          #    0,077 K/sec                  
+                 1      cpu-migrations            #    0,013 K/sec                  
+                74      page-faults               #    0,949 K/sec                  
+        77.163.647      cycles                    #    0,990 GHz                      (35,04%)
+       137.646.302      instructions              #    1,78  insn per cycle           (75,79%)
+        22.461.507      branches                  #  288,068 M/sec                    (80,51%)
+            17.822      branch-misses             #    0,08% of all branches          (83,13%)
+       131.365.295      L1-dcache-loads           # 1684,752 M/sec                    (84,64%)
+            14.798      L1-dcache-load-misses     #    0,01% of all L1-dcache hits    (77,50%)
+             8.184      LLC-loads                 #    0,105 M/sec                    (42,71%)
+             1.440      LLC-load-misses           #   17,60% of all LL-cache hits     (30,77%)
+
+       0,078727587 seconds time elapsed
+
+Para o código que não usa mutex, o resultado da execução do perf foi:
+
+	   Performance counter stats for './questao1_v1':
+
+        248,857179      task-clock (msec)         #    2,803 CPUs utilized          
+                12      context-switches          #    0,048 K/sec                  
+                 1      cpu-migrations            #    0,004 K/sec                  
+                74      page-faults               #    0,297 K/sec                  
+       736.448.310      cycles                    #    2,959 GHz                      (43,13%)
+       281.609.810      instructions              #    0,38  insn per cycle           (59,70%)
+        26.873.129      branches                  #  107,986 M/sec                    (62,00%)
+            19.825      branch-misses             #    0,07% of all branches          (66,76%)
+       102.224.660      L1-dcache-loads           #  410,776 M/sec                    (70,50%)
+         2.742.446      L1-dcache-load-misses     #    2,68% of all L1-dcache hits    (69,07%)
+            38.777      LLC-loads                 #    0,156 M/sec                    (50,38%)
+             2.480      LLC-load-misses           #    6,40% of all LL-cache hits     (45,61%)
+
+       0,088792423 seconds time elapsed
+
+Percebe-se que o tempo de execução do  código que usa mutex foi menor (0,078727587 segundos) do que o que não usa (0,088792423 segundos) . Isso ocorre porque  não há várias threads tentando mexer na variável do contador ao mesmo tempo,o mutex só permite uma operação de leitura e escrita por vez. No código onde não se usa mutex, mais de uma thread pode ler/gravar no contador ao mesmo tempo e nesse caso, há disputa entre as threads, o que pode fazer com que o desempenho diminua.
 
 ## Questão 2 ##
 [Resolução da Questão 2](https://github.com/tainahemmanuele/programacao_concorrente/tree/master/lista1/Quest%C3%A3o2/src/q2)
