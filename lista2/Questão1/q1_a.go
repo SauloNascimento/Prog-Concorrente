@@ -36,7 +36,6 @@ func gateway(num_request int) {
 
 func main() {
 	e := os.Args[1]
-
 	num, _ := strconv.Atoi(e)
 	gateway(num)
 
