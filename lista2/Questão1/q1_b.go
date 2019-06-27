@@ -20,6 +20,7 @@ func request(done chan int, num_request int) {
 			tempo := r.Intn(30) + 1
 			time.Sleep(time.Duration(tempo) * time.Second)
 			count++
+			println(tempo)
 			sum += tempo
 		}
 	}
