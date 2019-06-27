@@ -1,4 +1,4 @@
-package main
+package Questão2
 
 import (
 	"math/rand"
@@ -7,20 +7,17 @@ import (
 	"time"
 )
 
-var count int = 0
-var sum int  =0
-
-func request(done chan int, num_request int) {
+func request(done chan int) {
 	for {
-		if count == num_request {
-			done <- sum
+		select {
+		case <-done:
 			return
-		} else {
+		default:
 			r := rand.New(rand.NewSource(time.Now().UnixNano()))
 			tempo := r.Intn(30) + 1
+			println(tempo)
 			time.Sleep(time.Duration(tempo) * time.Second)
-			count++
-			sum += tempo
+			done <- tempo
 		}
 	}
 }
@@ -28,7 +25,7 @@ func request(done chan int, num_request int) {
 func gateway(num_request int) {
 	done := make(chan int)
 	for i := 0; i < num_request; i++ {
-		go request(done,num_request)
+		go request(done)
 	}
 	result := <- done
 	close(done)
@@ -41,5 +38,4 @@ func main() {
 	e := os.Args[1]
 	num, _ := strconv.Atoi(e)
 	gateway(num)
-
 }

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"math/rand"
 	"os"
 	"strconv"
@@ -8,33 +9,33 @@ import (
 )
 
 func request(done chan int) {
-	for {
-		select {
-		case <-done:
-			return
-		default:
-			r := rand.New(rand.NewSource(time.Now().UnixNano()))
-			tempo := r.Intn(30) + 1
-			println(tempo)
-			time.Sleep(time.Duration(tempo) * time.Second)
-			done <- tempo
-		}
-	}
+
+	r := rand.New(rand.NewSource(time.Now().UnixNano()))
+	tempo := r.Intn(30) + 1
+	fmt.Println(tempo)
+	time.Sleep(time.Duration(tempo) * time.Second)
+	done <- tempo
+
 }
 
 func gateway(num_request int) {
 	done := make(chan int)
 	for i := 0; i < num_request; i++ {
-		go request(done)
+		select {
+		case <-done:
+			return
+		default:
+			go request(done)
+		}
 	}
-	result := <- done
+	result := <-done
 	close(done)
-	println(result)
+	fmt.Println(result)
 
 }
 
-
 func main() {
+	rand.Seed(time.Now().UTC().UnixNano())
 	e := os.Args[1]
 	num, _ := strconv.Atoi(e)
 	gateway(num)
