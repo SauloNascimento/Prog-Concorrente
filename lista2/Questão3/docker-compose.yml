@@ -1,0 +1,29 @@
+version: '3'
+services:
+  go:
+    build: ./Go
+    image: go-exp
+    container_name: go_256_threads
+    working_dir: /opt
+    restart: always
+    volumes:
+      - ./Go/:/opt/
+  java:
+    build: ./Java
+    image: java-exp
+    container_name: java_256_threads
+    working_dir: /opt
+    restart: always
+    volumes:
+      - ./Java:/opt
+
+  #monitor:
+    #image: google/cadvisor
+    #volumes:
+      #- /:/rootfs:ro
+      #- /var/run:/var/run:rw
+      #- /sys:/sys:ro
+      #- /var/lib/docker/:/var/lib/docker:ro
+    #restart: always
+    #ports:
+      #- "8017:8080"
