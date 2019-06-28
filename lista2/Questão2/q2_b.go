@@ -21,6 +21,12 @@ func request(done chan int, num_request int, waitgroup *sync.WaitGroup) {
 
 }
 
+func timeout(done chan int, waitgroup *sync.WaitGroup) {
+	waitgroup.Wait()
+	time.Sleep(16 * time.Second)
+	done <- -1
+}
+
 func gateway(num_request int) {
 	done := make(chan int, num_request - 1)
 	var waitgroup sync.WaitGroup
@@ -33,10 +39,17 @@ func gateway(num_request int) {
 			go request(done,num_request, &waitgroup)
 		}
 	}
+  go timeout(done, &waitgroup)
 	waitgroup.Done()
 	soma := 0
 	for i := 0; i < num_request; i++ {
-		soma += <-done
+    num := <-done
+		if num > 0 {
+      soma += num
+    } else {
+      soma = -1
+      break
+    }
 	}
 	close(done)
 	fmt.Println(soma)
@@ -47,5 +60,4 @@ func main() {
 	e := os.Args[1]
 	num, _ := strconv.Atoi(e)
 	gateway(num)
-
 }

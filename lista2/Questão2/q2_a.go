@@ -1,41 +1,53 @@
-package Questão2
+package main
 
 import (
+	"fmt"
 	"math/rand"
 	"os"
 	"strconv"
 	"time"
+	"sync"
 )
 
-func request(done chan int) {
-	for {
-		select {
-		case <-done:
-			return
-		default:
-			r := rand.New(rand.NewSource(time.Now().UnixNano()))
-			tempo := r.Intn(30) + 1
-			println(tempo)
-			time.Sleep(time.Duration(tempo) * time.Second)
-			done <- tempo
-		}
-	}
+func request(done chan int, waitgroup *sync.WaitGroup) {
+	waitgroup.Wait()
+	tempo := rand.Intn(30) + 1
+	fmt.Println(tempo)
+	time.Sleep(time.Duration(tempo) * time.Second)
+	done <- tempo
+
+}
+
+func timeout(done chan int, waitgroup *sync.WaitGroup) {
+	waitgroup.Wait()
+	time.Sleep(8 * time.Second)
+	done <- -1
 }
 
 func gateway(num_request int) {
 	done := make(chan int)
+	var waitgroup sync.WaitGroup
+	waitgroup.Add(1)
 	for i := 0; i < num_request; i++ {
-		go request(done)
+		select {
+		case <-done:
+			return
+		default:
+			go request(done, &waitgroup)
+		}
 	}
-	result := <- done
+	go timeout(done, &waitgroup)
+	waitgroup.Done()
+	result := <-done
 	close(done)
-	println(result)
-
+	fmt.Println(result)
 }
 
 
 func main() {
+	rand.Seed(time.Now().UTC().UnixNano())
 	e := os.Args[1]
 	num, _ := strconv.Atoi(e)
 	gateway(num)
+
 }
