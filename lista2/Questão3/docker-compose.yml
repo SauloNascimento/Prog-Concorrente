@@ -3,7 +3,7 @@ services:
   go:
     build: ./Go
     image: go-exp
-    container_name: go_256_threads
+    container_name: go_x_threads
     working_dir: /opt
     restart: always
     volumes:
@@ -11,7 +11,7 @@ services:
   java:
     build: ./Java
     image: java-exp
-    container_name: java_256_threads
+    container_name: java_x_threads
     working_dir: /opt
     restart: always
     volumes:
