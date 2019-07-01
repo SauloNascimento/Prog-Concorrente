@@ -87,4 +87,4 @@ O experimento foi executado iniciando em 2 threads e dobrando o valor de threads
 ![](https://github.com/tainahemmanuele/programacao_concorrente/blob/master/lista2/Quest%C3%A3o3/img/threads_2256.png) 
 
 
-Ao fim do experimento e observando os gráficos gerados,  pode-se observar pelo consumo de memória, as Goroutines são mais eficientes que a Threads de Java, pois consomem menos memória, e conforme aumentamos o número de threads e goroutines, a diferença de consumo de memória cresce, mostrando consistência na maior eficiência das go routines.
+Ao fim do experimento e observando os gráficos gerados,  pode-se observar pelo consumo de memória, as Goroutines são mais eficientes que a Threads de Java, pois consomem menos memória, e conforme aumentamos o número de threads e goroutines, a diferença de consumo de memória cresce, mostrando consistência na maior eficiência das goroutines.
