@@ -6,11 +6,10 @@ import (
 	"os"
 	"strconv"
 	"time"
-	"sync"
 )
 
-func request(done chan int, waitgroup *sync.WaitGroup) {
-	waitgroup.Wait()
+func request(done chan int, start chan interface{}) {
+	<-start
 	tempo := rand.Intn(30) + 1
 	fmt.Println(tempo)
 	time.Sleep(time.Duration(tempo) * time.Second)
@@ -20,17 +19,16 @@ func request(done chan int, waitgroup *sync.WaitGroup) {
 
 func gateway(num_request int) {
 	done := make(chan int)
-	var waitgroup sync.WaitGroup
-	waitgroup.Add(1)
+	start := make(chan interface{})
 	for i := 0; i < num_request; i++ {
 		select {
 		case <-done:
 			return
 		default:
-			go request(done, &waitgroup)
+			go request(done, start)
 		}
 	}
-	waitgroup.Done()
+	close(start)
 	result := <-done
 	close(done)
 	fmt.Println(result)
