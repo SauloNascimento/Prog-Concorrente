@@ -2,6 +2,15 @@
 
 [Questões da Lista](https://docs.google.com/document/d/1hXRGvRRBkkl7qGsZOJK_loT9bIqFnnDsSt4oZ8O5pGo/edit)
 
+## Executando as Questões em Go ##
+Os códigos da questão 1 e da questão 2 devem ser executados da seguinte maneira:
+
+    go run nomedaquestao numerodereplicas
+
+Onde *nomedaquestao* é o nome do arquivo relacionado a letra da questão
+
+E *numerodereplicas*, a quantidade de replicas de goroutines que devem ser criadas 
+
 ## Questão 1 ##
 
 [Letra a](https://github.com/tainahemmanuele/programacao_concorrente/blob/master/lista2/Quest%C3%A3o1/q1_a.go)
@@ -87,4 +96,4 @@ O experimento foi executado iniciando em 2 threads e dobrando o valor de threads
 ![](https://github.com/tainahemmanuele/programacao_concorrente/blob/master/lista2/Quest%C3%A3o3/img/threads_2256.png) 
 
 
-Ao fim do experimento e observando os gráficos gerados,  pode-se observar pelo consumo de memória, as Goroutines são mais eficientes que a Threads de Java, pois consomem menos memória, e conforme aumentamos o número de threads e goroutines, a diferença de consumo de memória cresce, mostrando consistência na maior eficiência das goroutines.
+Ao fim do experimento e observando os gráficos gerados,  pode-se observar pelo consumo de memória, as Goroutines são mais eficientes que a Threads de Java, pois consomem menos memória. Conforme aumentamos o número de threads e goroutines, a diferença de consumo de memória cresce, mostrando consistência na maior eficiência das goroutines.
